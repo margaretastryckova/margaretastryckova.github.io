@@ -1,0 +1,722 @@
+/* ============================================
+   MARGARETA Portfolio - Main Styles
+   ============================================ */
+
+/* Custom Font - NT Voyager */
+@font-face {
+    font-family: 'NT Voyager';
+    src: url('Nt-Voyager-BF683d917c4a224.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* CSS Variables */
+:root {
+    --color-bg: #0a0a0a;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255, 255, 255, 0.7);
+    --color-accent: #ff6b35;
+    --font-display: 'NT Voyager', 'Playfair Display', serif;
+    --font-body: 'Inter', sans-serif;
+    --transition-smooth: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Reset & Base */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 500px;
+    max-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Animated Gradient Background */
+.gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg,
+            #fefae0 0%,
+            #f4f1de 15%,
+            #faedcd 30%,
+            #eae2b7 45%,
+            #fdf0d5 60%,
+            #d4c9a8 75%,
+            #a8b5b8 88%,
+            #7b9aa7 100%);
+    background-size: 100% 100%;
+    z-index: 0;
+}
+
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    25% {
+        background-position: 100% 50%;
+    }
+
+    50% {
+        background-position: 100% 100%;
+    }
+
+    75% {
+        background-position: 0% 100%;
+    }
+}
+
+/* Overlay for better text readability */
+.gradient-bg::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center,
+            rgba(255, 255, 255, 0.1) 0%,
+            rgba(255, 255, 255, 0) 100%);
+}
+
+/* Floating Photos Container */
+.floating-photos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Individual Floating Photo */
+.floating-photo {
+    position: absolute;
+    width: 120px;
+    height: 160px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    animation: floatRight 25s linear infinite;
+    opacity: 0.85;
+    transition: var(--transition-smooth);
+}
+
+.floating-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.floating-photo:hover {
+    opacity: 1;
+    transform: scale(1.1);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes floatRight {
+    0% {
+        transform: translateX(100vw);
+    }
+
+    100% {
+        transform: translateX(-200px);
+    }
+}
+
+/* Hero Content */
+.hero-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+}
+
+.main-title {
+    font-family: var(--font-display);
+    font-size: clamp(50px, 12vw, 160px);
+    font-weight: normal;
+    letter-spacing: 0.05em;
+    color: #1a237e;
+    text-shadow: none;
+    margin-bottom: 15px;
+    line-height: 1;
+    padding: 0 20px;
+}
+
+.subtitle {
+    font-family: var(--font-body);
+    font-size: clamp(16px, 2.5vw, 28px);
+    font-weight: 300;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #1a237e;
+    opacity: 0.9;
+    text-shadow: none;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.9;
+    animation: bounceDown 2s infinite;
+}
+
+.scroll-indicator span {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #1a237e;
+}
+
+.scroll-arrow {
+    width: 20px;
+    height: 20px;
+    border-right: 2px solid #1a237e;
+    border-bottom: 2px solid #1a237e;
+    transform: rotate(45deg);
+}
+
+@keyframes bounceDown {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(10px);
+    }
+}
+
+/* ============================================
+   ABOUT SECTION
+   ============================================ */
+.about-section {
+    position: relative;
+    min-height: auto;
+    padding: 60px 0;
+    width: 100%;
+    background-image: url('fotky/about-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* Gradient fade at top of about section - matches hero bottom color */
+.about-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(180deg,
+            #7b9aa7 0%,
+            rgba(123, 154, 167, 0.8) 30%,
+            rgba(123, 154, 167, 0.4) 60%,
+            transparent 100%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Light overlay for text readability */
+.about-bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-content-wrapper {
+    position: relative;
+    z-index: 5;
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 30px;
+}
+
+.about-title {
+    text-align: center;
+    color: #000000;
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.5);
+}
+
+.about-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.about-text-left,
+.about-text-right {
+    flex: 1;
+    max-width: 280px;
+}
+
+.about-text-left .about-description,
+.about-text-right .about-description {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #111111;
+    margin-bottom: 14px;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.4);
+}
+
+.about-video-center {
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 28px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+}
+
+.about-video-center .featured-video {
+    width: auto;
+    height: clamp(280px, 45vh, 380px);
+    max-width: 100%;
+    object-fit: cover;
+    border-radius: 28px;
+    margin: -8px -4px -8px -4px;
+    transform: scale(1.04);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--color-text);
+}
+
+.section-title.center {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.section-title.light {
+    color: var(--color-text);
+}
+
+.about-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: var(--color-text-muted);
+    margin-bottom: 20px;
+}
+
+.about-image {
+    position: relative;
+}
+
+.featured-img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+.about-video {
+    position: relative;
+}
+
+.featured-video {
+    width: 100%;
+    height: 450px;
+    object-fit: cover;
+    border-radius: 16px;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================
+   GALLERY SECTION
+   ============================================ */
+.gallery-section {
+    padding: 150px 0;
+    background-image: url('fotky/about-bg.jpg');
+    background-size: cover;
+    background-position: center bottom;
+    background-attachment: fixed;
+    position: relative;
+}
+
+.gallery-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 15, 26, 0.75);
+    pointer-events: none;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 18px;
+    color: var(--color-text-muted);
+    margin-bottom: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    aspect-ratio: 1;
+    max-height: 320px;
+}
+
+.gallery-item.large {
+    grid-column: span 2;
+    aspect-ratio: 2;
+    max-height: 280px;
+}
+
+.gallery-item.tall {
+    grid-row: span 2;
+    aspect-ratio: auto;
+    max-height: 580px;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.gallery-item:hover img {
+    transform: scale(1.1);
+}
+
+.gallery-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 30px;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.gallery-item:hover .gallery-overlay {
+    opacity: 1;
+}
+
+.gallery-overlay span {
+    font-family: var(--font-display);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* ============================================
+   SERVICES SECTION
+   ============================================ */
+.services-section {
+    padding: 150px 0;
+    background: linear-gradient(135deg,
+            #1a0a2e 0%,
+            #2d1b4e 50%,
+            #4a1f6e 100%);
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.service-card {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 50px 40px;
+    text-align: center;
+    transition: var(--transition-smooth);
+}
+
+.service-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-10px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+
+.service-icon {
+    font-size: 48px;
+    margin-bottom: 25px;
+}
+
+.service-card h3 {
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.service-card p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+}
+
+/* ============================================
+   CONTACT SECTION
+   ============================================ */
+.contact-section {
+    padding: 150px 0;
+    background: #0a0a0a;
+    text-align: center;
+}
+
+.contact-info {
+    margin-top: 50px;
+}
+
+.contact-link {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 4vw, 48px);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: var(--transition-smooth);
+    display: inline-block;
+}
+
+.contact-link:hover {
+    color: var(--color-accent);
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.social-link {
+    font-size: 16px;
+    color: var(--color-text-muted);
+    text-decoration: none;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+    position: relative;
+}
+
+.social-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-accent);
+    transition: var(--transition-smooth);
+}
+
+.social-link:hover {
+    color: var(--color-text);
+}
+
+.social-link:hover::after {
+    width: 100%;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    padding: 40px 0;
+    background: #050505;
+    text-align: center;
+}
+
+.footer p {
+    color: var(--color-text-muted);
+    font-size: 14px;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 1024px) {
+    .about-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about-text-left,
+    .about-text-right {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .about-video-center .featured-video {
+        height: clamp(240px, 40vh, 320px);
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-item.large {
+        grid-column: span 2;
+    }
+
+    .gallery-item.tall {
+        grid-row: span 1;
+        aspect-ratio: 1;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 0 20px;
+    }
+
+    .about-section {
+        padding: 40px 0;
+        background-attachment: scroll;
+    }
+
+    .about-content-wrapper {
+        padding: 30px 15px;
+    }
+
+    .about-video-center .featured-video {
+        height: clamp(200px, 35vh, 280px);
+    }
+
+    .about-title {
+        margin-bottom: 20px;
+    }
+
+    .gallery-section,
+    .services-section,
+    .contact-section {
+        padding: 80px 0;
+    }
+
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .gallery-item.large {
+        grid-column: span 1;
+        aspect-ratio: 16/9;
+    }
+
+    .floating-photo {
+        width: 80px;
+        height: 100px;
+    }
+
+    .social-links {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .featured-img {
+        height: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 48px;
+    }
+
+    .subtitle {
+        font-size: 14px;
+        letter-spacing: 0.15em;
+    }
+
+    .floating-photo {
+        width: 60px;
+        height: 80px;
+    }
+}
