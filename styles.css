@@ -293,7 +293,7 @@ body {
     padding: 40px 30px;
 }
 
-.about-title {
+.section-title.about-title {
     text-align: center;
     color: #000000;
     font-family: var(--font-display);
